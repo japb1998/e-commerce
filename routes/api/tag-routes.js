@@ -34,15 +34,13 @@ res.json(update)
   })
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async(req, res) => {
   // delete on tag by its `id` value
-  Tag.destroy({where:{
+  const tag = await Tag.destroy({where:{
     id: req.params.id
-  }}).then(()=>{
-   res.send('item destroyed')
-  }).catch((err)=>{
-    if (err) console.error(err)
-  })
+  }})
+   res.json(tag);
+  
 });
 
 module.exports = router;
